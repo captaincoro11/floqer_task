@@ -3,29 +3,17 @@ import axios from 'axios';
 import React, { useContext, useEffect } from 'react';
 import MyContext from '../context/context';
 import MainTable from './MainTable';
-interface Salary {
-  work_year: number;
-  salary: number;
-  no_of_jobs: number;
-  job_title: string;
-}
 
 const Calculation:React.FC = () => {
 
   const context:any = useContext(MyContext)
 
-  const {isLoading,handleOpen, setIsLoading ,data, setData ,calculation, setCalculation,setIsModalOpen,isModalOpen,handleOk,handleClose,target,setTarget} = context
-
-
-
-  
+  const {isLoading,handleOpen, setIsLoading ,data, setData ,calculation,isModalOpen,handleOk,handleClose,target,setTarget} = context
  
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<Salary[]>("https://script.googleusercontent.com/macros/echo?user_content_key=1m-VYBEmpW9a2yd5-PUbwOpXAEhSsQmi1lNKSovJlpcu_U8NGKRMSjkW_2oLJ2Af9Ke7D-wDir-bXEehbLTC2in0jMSEPZXpm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDYdI3Ic54TtQ0dA-9IhGGPldTS1lP9GKRKbhpm5HuUGityrtvGL8GK4q7qRRGkbe5yzPJH-B7t8m0j2qd9QR8UUKufpUXtSMw&lib=M8WiUXEatz1TgLIex5GctuCUOZ8ec8_J3");
+        const response = await axios.get("https://script.googleusercontent.com/macros/echo?user_content_key=1m-VYBEmpW9a2yd5-PUbwOpXAEhSsQmi1lNKSovJlpcu_U8NGKRMSjkW_2oLJ2Af9Ke7D-wDir-bXEehbLTC2in0jMSEPZXpm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDYdI3Ic54TtQ0dA-9IhGGPldTS1lP9GKRKbhpm5HuUGityrtvGL8GK4q7qRRGkbe5yzPJH-B7t8m0j2qd9QR8UUKufpUXtSMw&lib=M8WiUXEatz1TgLIex5GctuCUOZ8ec8_J3");
         const arr = Object.entries(response.data);
         const newarr = arr[0][1];
         setData(newarr);
@@ -64,7 +52,7 @@ const Calculation:React.FC = () => {
             
               
                 <div>{
-                   calculation.averageSalary.map((item:any,index:any)=>(
+                   calculation.averageSalary.map((item:string,index:number)=>(
                     <>
 
                     <div onClick={handleOpen}>
@@ -78,7 +66,7 @@ const Calculation:React.FC = () => {
                     <div className='flex'>
                       <div id='right'>
                         {
-                          calculation.job_titles.map((item:any,index:any)=>(
+                          calculation.job_titles.map((item:string,index:number)=>(
                             <div>
                               {item}
 
@@ -92,7 +80,7 @@ const Calculation:React.FC = () => {
                       <div id='left'>
                         {
                           target===2024?(
-                            calculation.unique_jobs_2024.map((item:any,index:any)=>(
+                            calculation.unique_jobs_2024.map((item:string,index:number)=>(
                               <div>
                                 {item}
                               </div>
@@ -100,7 +88,7 @@ const Calculation:React.FC = () => {
                           ):(
                             
                               target===2023?(
-                                calculation.unique_jobs_2023.map((item:any,index:any)=>(
+                                calculation.unique_jobs_2023.map((item:string,index:number)=>(
                                   <div>
                                     {item}
                                   </div>
@@ -108,7 +96,7 @@ const Calculation:React.FC = () => {
 
                               ):(
                                 target===2022?(
-                                  calculation.unique_jobs_2022.map((item:any,index:any)=>(
+                                  calculation.unique_jobs_2022.map((item:string,index:number)=>(
                                     <div>
                                       {item}
                                     </div>
@@ -117,7 +105,7 @@ const Calculation:React.FC = () => {
 
                               ):(
                                 target===2021?(
-                                  calculation.unique_jobs_2021.map((item:any,index:any)=>(
+                                  calculation.unique_jobs_2021.map((item:string,index:number)=>(
                                     <div>
                                       {item}
                                     </div>
@@ -125,7 +113,7 @@ const Calculation:React.FC = () => {
 
                               ):(
                                 target===2020?(
-                                  calculation.unique_jobs_2020.map((item:any,index:any)=>(
+                                  calculation.unique_jobs_2020.map((item:string,index:number)=>(
                                     <div>
                                       {item}
                                     </div>
@@ -141,48 +129,19 @@ const Calculation:React.FC = () => {
                           )
                         )
                       )
-                        
-                          
                         }
-
-
-                      </div>
+                        </div>
                     </div>
                   </Modal>
-</>
-                   
-
-                    
-                    
+                  </>
                   ))
-                
-              
-                  }
-                   
-
-                  
-                  </div>
-                 
-                  
-                 
-                   
-                
-         
-              
-             
-          
+                }
+                    </div>
+                 </div>
           </div>
-          </div>
-        
-          
-         
-
         )
-      
-
       }
-   
-    </div>
+   </div>
   )
 }
 
